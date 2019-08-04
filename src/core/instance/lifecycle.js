@@ -144,6 +144,7 @@ export function mountComponent (
   hydrating?: boolean
 ): Component {
   vm.$el = el
+  // 没提供render函数时候
   if (!vm.$options.render) {
     vm.$options.render = createEmptyVNode
     if (process.env.NODE_ENV !== 'production') {
@@ -164,6 +165,7 @@ export function mountComponent (
       }
     }
   }
+  // 调用hook
   callHook(vm, 'beforeMount')
 
   let updateComponent
@@ -174,9 +176,10 @@ export function mountComponent (
       const id = vm._uid
       const startTag = `vue-perf-start:${id}`
       const endTag = `vue-perf-end:${id}`
-
+      // 标记开始标签
       mark(startTag)
       const vnode = vm._render()
+      // 标记结束标签
       mark(endTag)
       measure(`vue ${name} render`, startTag, endTag)
 
@@ -194,6 +197,7 @@ export function mountComponent (
   // we set this to vm._watcher inside the watcher's constructor
   // since the watcher's initial patch may call $forceUpdate (e.g. inside child
   // component's mounted hook), which relies on vm._watcher being already defined
+  // 实例化watcher
   new Watcher(vm, updateComponent, noop, {
     before () {
       if (vm._isMounted && !vm._isDestroyed) {
@@ -207,6 +211,7 @@ export function mountComponent (
   // mounted is called for render-created child components in its inserted hook
   if (vm.$vnode == null) {
     vm._isMounted = true
+    // 组件已经挂载,调用mounted钩子
     callHook(vm, 'mounted')
   }
   return vm

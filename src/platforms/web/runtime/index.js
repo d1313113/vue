@@ -34,10 +34,12 @@ extend(Vue.options.components, platformComponents)
 Vue.prototype.__patch__ = inBrowser ? patch : noop
 
 // public mount method
+// 非编译版本mount方法
 Vue.prototype.$mount = function (
   el?: string | Element,
   hydrating?: boolean
 ): Component {
+  // 获取到el的dom实例
   el = el && inBrowser ? query(el) : undefined
   return mountComponent(this, el, hydrating)
 }
@@ -46,8 +48,10 @@ Vue.prototype.$mount = function (
 /* istanbul ignore next */
 if (inBrowser) {
   setTimeout(() => {
+    // 配置了开启开发工具
     if (config.devtools) {
       if (devtools) {
+        // 初始化vue开发工具
         devtools.emit('init', Vue)
       } else if (
         process.env.NODE_ENV !== 'production' &&
@@ -59,6 +63,7 @@ if (inBrowser) {
         )
       }
     }
+    // 友好的提示,项目用于生产时选择生产模式
     if (process.env.NODE_ENV !== 'production' &&
       process.env.NODE_ENV !== 'test' &&
       config.productionTip !== false &&
