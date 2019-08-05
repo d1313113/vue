@@ -49,6 +49,7 @@ function normalizeArrayChildren (children: any, nestedIndex?: string): Array<VNo
     lastIndex = res.length - 1
     last = res[lastIndex]
     //  nested
+    // 嵌套类型,数组情况下,递归调用将数据转成数组,判断是否文本节点,出队列,入res栈
     if (Array.isArray(c)) {
       if (c.length > 0) {
         c = normalizeArrayChildren(c, `${nestedIndex || ''}_${i}`)
