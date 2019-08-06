@@ -70,6 +70,7 @@ const componentVNodeHooks = {
     const { context, componentInstance } = vnode
     if (!componentInstance._isMounted) {
       componentInstance._isMounted = true
+      // 组件mounted钩子
       callHook(componentInstance, 'mounted')
     }
     if (vnode.data.keepAlive) {
