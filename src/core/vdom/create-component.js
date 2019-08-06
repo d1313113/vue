@@ -49,6 +49,7 @@ const componentVNodeHooks = {
         vnode,
         activeInstance
       )
+      // 自己接管了$mount
       child.$mount(hydrating ? vnode.elm : undefined, hydrating)
     }
   },
@@ -223,6 +224,7 @@ export function createComponentInstanceForVnode (
     options.render = inlineTemplate.render
     options.staticRenderFns = inlineTemplate.staticRenderFns
   }
+  // 子组件构造函数
   return new vnode.componentOptions.Ctor(options)
 }
 
