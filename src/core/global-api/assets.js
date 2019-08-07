@@ -3,6 +3,7 @@
 import { ASSET_TYPES } from 'shared/constants'
 import { isPlainObject, validateComponentName } from '../util/index'
 
+// 初始化全局api
 export function initAssetRegisters (Vue: GlobalAPI) {
   /**
    * Create asset registration methods.
